@@ -33,14 +33,17 @@ services:
     depends_on:
       - postgres
       - redis
+    entrypoint: /bin/bash
+    command: -c "airflow db init && airflow webserver"
 
   mlflow:
     image: ghcr.io/mlflow/mlflow:v2.0.1
     environment:
       GUNICORN_CMD_ARGS: "--timeout 60"
-      MLFLOW_TRACKING_URI: "http://mlflow:5000"
+      MLFLOW_TRACKING_URI: "http://mlflow:5001"
     ports:
       - "5001:5000"
+    command: mlflow server --host 0.0.0.0 --port 5001
 
   minio:
     image: minio/minio
