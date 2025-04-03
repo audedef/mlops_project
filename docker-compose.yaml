@@ -54,9 +54,11 @@ services:
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
-    command: server /data
+      MINIO_BROWSER: "on"
+    command: server /data --console-address ":9001"
     ports:
-      - "9000:9000"
+      - "9000:9000"  # Port pour l'API
+      - "9001:9001"  # Port pour la WebUI
     volumes:
       - minio_data:/data
 
