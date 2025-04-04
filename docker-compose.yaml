@@ -17,15 +17,17 @@ services:
     ports:
       - "6379:6379"
 
-  airflow:
+  airflow-webserver:
     image: apache/airflow:2.5.1
     environment:
       _AIRFLOW_WWW_USER_CREATE: 'true'
       _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
       _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
-      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__EXECUTOR: CeleryExecutor
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
       AIRFLOW__CORE__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+      AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
       AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
     volumes:
@@ -39,6 +41,40 @@ services:
       - redis
     entrypoint: /bin/bash
     command: -c "airflow db init && airflow users create --username airflow --password airflow --firstname Aude --lastname Fornel --role Admin --email audedefornel@gmail.com && airflow webserver"
+
+  airflow-scheduler:
+    image: apache/airflow:2.5.1
+    environment:
+      AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+      AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
+    volumes:
+      - ./src/airflow/dags:/opt/airflow/dags
+      - ./src/airflow/plugins:/opt/airflow/plugins
+      - ./src/airflow/logs:/opt/airflow/logs
+    depends_on:
+      - postgres
+      - redis
+    command: scheduler
+
+  airflow-worker:
+    image: apache/airflow:2.5.1
+    environment:
+      AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+      AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
+    volumes:
+      - ./src/airflow/dags:/opt/airflow/dags
+      - ./src/airflow/plugins:/opt/airflow/plugins
+      - ./src/airflow/logs:/opt/airflow/logs
+    depends_on:
+      - postgres
+      - redis
+    command: celery worker
 
   mlflow:
     image: ghcr.io/mlflow/mlflow:v2.0.1
