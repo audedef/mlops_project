@@ -39,7 +39,8 @@ def download_image(url, local_path):
 def upload_to_minio(filename, key, bucket_name='images-bucket'):
     s3 = S3Hook(aws_conn_id='minio_s3')
     s3.load_file(filename=filename, key=key,
-                 bucket_name=bucket_name, replace=True)
+                 bucket_name=bucket_name, replace=True),
+    time.sleep(1)
 
 
 # Fonction pour lister les images dans un répertoire GitHub
@@ -58,8 +59,10 @@ def check_image_in_s3(key, bucket_name='images-bucket'):
 
 
 # Fonction pour générer le fichier CSV
-def generate_csv(image_data, output_path='../../data/dataset.csv'):
+def generate_csv(image_data, output_path='/opt/airflow/data/dataset.csv'):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    # Ajouter un log pour vérifier le chemin
+    print(f"Generating CSV at: {output_path}")
     with open(output_path, mode='w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(["image_path", "label"])

@@ -34,6 +34,7 @@ services:
       - ./src/airflow/dags:/opt/airflow/dags
       - ./src/airflow/plugins:/opt/airflow/plugins
       - ./src/airflow/logs:/opt/airflow/logs
+      - ./data:/opt/airflow/data
     ports:
       - "8080:8080"
     depends_on:
@@ -54,6 +55,7 @@ services:
       - ./src/airflow/dags:/opt/airflow/dags
       - ./src/airflow/plugins:/opt/airflow/plugins
       - ./src/airflow/logs:/opt/airflow/logs
+      - ./data:/opt/airflow/data
     depends_on:
       - postgres
       - redis
@@ -71,6 +73,7 @@ services:
       - ./src/airflow/dags:/opt/airflow/dags
       - ./src/airflow/plugins:/opt/airflow/plugins
       - ./src/airflow/logs:/opt/airflow/logs
+      - ./data:/opt/airflow/data
     depends_on:
       - postgres
       - redis
