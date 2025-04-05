@@ -1,59 +1,111 @@
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
-from airflow.hooks.postgres_hook import PostgresHook
-from airflow.hooks.S3_hook import S3Hook
+from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+from datetime import datetime, timedelta
 import requests
-from datetime import datetime
+import os
+import csv
 
 # Configuration du DAG
 default_args = {
     'owner': 'airflow',
+    'depends_on_past': False,
     'start_date': datetime(2023, 1, 1),
+    'email_on_failure': False,
+    'email_on_retry': False,
     'retries': 1,
+    'retry_delay': timedelta(minutes=5),
 }
 
-dag = DAG('extract_plant_images', default_args=default_args,
-          schedule_interval='@daily')
+dag = DAG(
+    'download_and_store_images',
+    default_args=default_args,
+    description='A DAG to download and store images from GitHub repositories',
+    schedule_interval=timedelta(days=1),
+    catchup=False,
+    max_active_runs=32
+)
+
+# Fonction pour télécharger une image
 
 
-def extract_and_upload_images():
-    # Connexion à PostgreSQL
-    pg_hook = PostgresHook(postgres_conn_id='postgres_default')
-    connection = pg_hook.get_conn()
-    cursor = connection.cursor()
-
-    # Récupération des données
-    cursor.execute(
-        "SELECT id, url_source, label FROM plants_data WHERE url_s3 IS NULL")
-    rows = cursor.fetchall()
-
-    # Connexion à S3
-    s3_hook = S3Hook(aws_conn_id='aws_default')
-    bucket_name = 'your-s3-bucket-name'
-
-    for row in rows:
-        image_id, url_source, label = row
-        response = requests.get(url_source)
-
-        if response.status_code == 200:
-            s3_key = f"plants/{label}/{image_id}.jpg"
-            s3_hook.load_bytes(response.content, key=s3_key,
-                               bucket_name=bucket_name)
-
-            # Mise à jour de l'URL S3 dans la base de données
-            cursor.execute("UPDATE plants_data SET url_s3 = %s WHERE id = %s",
-                           (f"s3://{bucket_name}/{s3_key}", image_id))
-            connection.commit()
-
-    cursor.close()
-    connection.close()
+def download_image(url, local_path):
+    response = requests.get(url)
+    with open(local_path, 'wb') as file:
+        file.write(response.content)
 
 
-# Tâche d'extraction et de téléchargement des images
-extract_and_upload = PythonOperator(
-    task_id='extract_and_upload_images',
-    python_callable=extract_and_upload_images,
+# Fonction pour uploader une image vers Minio
+def upload_to_minio(filename, key, bucket_name='images-bucket'):
+    s3 = S3Hook(aws_conn_id='minio_s3')
+    s3.load_file(filename=filename, key=key,
+                 bucket_name=bucket_name, replace=True),
+    time.sleep(1)
+
+
+# Fonction pour lister les images dans un répertoire GitHub
+def list_github_images(repo_url):
+    response = requests.get(repo_url)
+    if response.status_code == 200:
+        return [item['download_url'] for item in response.json() if item['name'].endswith('.jpg')]
+    else:
+        return []
+
+
+# Fonction pour vérifier si une image existe dans le bucket S3
+def check_image_in_s3(key, bucket_name='images-bucket'):
+    s3 = S3Hook(aws_conn_id='minio_s3')
+    return s3.check_for_key(key, bucket_name)
+
+
+# Fonction pour générer le fichier CSV
+def generate_csv(image_data, output_path='/opt/airflow/data/dataset.csv'):
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    # Ajouter un log pour vérifier le chemin
+    print(f"Generating CSV at: {output_path}")
+    with open(output_path, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["image_path", "label"])
+        writer.writerows(image_data)
+
+
+# Tâche pour télécharger, uploader les images et générer le fichier CSV
+def download_and_upload_images():
+    # Répertoires GitHub contenant les images
+    repos = [
+        ("https://api.github.com/repos/btphan95/greenr-airflow/contents/data/dandelion", "dandelion"),
+        ("https://api.github.com/repos/btphan95/greenr-airflow/contents/data/grass", "grass")
+    ]
+
+    image_data = []
+
+    for repo, label in repos:
+        image_urls = list_github_images(repo)
+        for url in image_urls:
+            image_name = os.path.basename(url)
+            new_image_name = f"{label}_{image_name}"
+            local_path = f"/tmp/{new_image_name}"
+
+            # Vérifier si l'image existe déjà dans le bucket S3
+            if not check_image_in_s3(new_image_name):
+                # Télécharger l'image
+                download_image(url, local_path)
+                # Uploader l'image vers Minio
+                upload_to_minio(local_path, new_image_name)
+
+            # Ajouter l'image et son label au fichier CSV
+            image_data.append((f"s3://images-bucket/{new_image_name}", label))
+
+    # Générer le fichier CSV
+    generate_csv(image_data)
+
+
+# Tâche pour télécharger, uploader les images et générer le fichier CSV
+download_and_upload_task = PythonOperator(
+    task_id='download_and_upload_images',
+    python_callable=download_and_upload_images,
     dag=dag,
 )
 
-extract_and_upload
+# Définir l'ordre des tâches
+download_and_upload_task
