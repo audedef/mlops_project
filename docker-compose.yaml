@@ -100,6 +100,20 @@ services:
       - "9001:9001"  # Port pour la WebUI
     volumes:
       - minio_data:/data
+  
+  ml-train:
+    build:
+      context: ./src/ml  # Chemin vers le répertoire contenant le Dockerfile
+      dockerfile: Dockerfile
+    volumes:
+      - ./src/ml:/app/src/ml  # Monter votre code source pour les modifications rapides
+      - ./data:/app/data      # Monter votre répertoire de données
+    environment:
+      AWS_S3_ENDPOINT: "http://minio:9000"  # Utiliser le nom de service 'minio'
+      AWS_ACCESS_KEY_ID: "minioadmin"
+      AWS_SECRET_ACCESS_KEY: "minioadmin"
+    depends_on:
+      - minio
 
   api:
     build:
