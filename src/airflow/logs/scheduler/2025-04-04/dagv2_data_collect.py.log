@@ -1,0 +1,61 @@
+[2025-04-04T08:57:03.461+0000] {processor.py:153} INFO - Started process (PID=36) to work on /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:57:03.462+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/dagv2_data_collect.py for tasks to queue
+[2025-04-04T08:57:03.464+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:57:03.463+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:57:04.584+0000] {processor.py:753} INFO - DAG(s) dict_keys(['download_and_store_images']) retrieved from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:57:04.630+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:57:04.630+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2025-04-04T08:57:04.774+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:57:04.774+0000] {dag.py:3441} INFO - Setting next_dagrun for download_and_store_images to 2023-01-03T00:00:00+00:00, run_after=2023-01-04T00:00:00+00:00
+[2025-04-04T08:57:04.817+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/dagv2_data_collect.py took 1.362 seconds
+[2025-04-04T08:57:35.338+0000] {processor.py:153} INFO - Started process (PID=51) to work on /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:57:35.345+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/dagv2_data_collect.py for tasks to queue
+[2025-04-04T08:57:35.349+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:57:35.349+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:57:36.071+0000] {processor.py:753} INFO - DAG(s) dict_keys(['download_and_store_images']) retrieved from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:57:36.324+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:57:36.323+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2025-04-04T08:57:36.569+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/dagv2_data_collect.py took 1.255 seconds
+[2025-04-04T08:58:06.991+0000] {processor.py:153} INFO - Started process (PID=88) to work on /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:58:06.993+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/dagv2_data_collect.py for tasks to queue
+[2025-04-04T08:58:06.996+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:58:06.996+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:58:08.109+0000] {processor.py:753} INFO - DAG(s) dict_keys(['download_and_store_images']) retrieved from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:58:08.239+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:58:08.238+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2025-04-04T08:58:08.381+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:58:08.381+0000] {dag.py:3441} INFO - Setting next_dagrun for download_and_store_images to 2023-02-01T00:00:00+00:00, run_after=2023-02-02T00:00:00+00:00
+[2025-04-04T08:58:08.477+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/dagv2_data_collect.py took 1.498 seconds
+[2025-04-04T08:58:38.684+0000] {processor.py:153} INFO - Started process (PID=133) to work on /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:58:38.686+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/dagv2_data_collect.py for tasks to queue
+[2025-04-04T08:58:38.687+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:58:38.687+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:58:38.899+0000] {processor.py:753} INFO - DAG(s) dict_keys(['download_and_store_images']) retrieved from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:58:38.952+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:58:38.951+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2025-04-04T08:58:39.051+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:58:39.050+0000] {dag.py:3441} INFO - Setting next_dagrun for download_and_store_images to 2023-02-18T00:00:00+00:00, run_after=2023-02-19T00:00:00+00:00
+[2025-04-04T08:58:39.106+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/dagv2_data_collect.py took 0.428 seconds
+[2025-04-04T08:59:09.722+0000] {processor.py:153} INFO - Started process (PID=192) to work on /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:59:09.726+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/dagv2_data_collect.py for tasks to queue
+[2025-04-04T08:59:09.730+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:59:09.730+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:59:10.299+0000] {processor.py:753} INFO - DAG(s) dict_keys(['download_and_store_images']) retrieved from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:59:10.406+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:59:10.406+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2025-04-04T08:59:10.555+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:59:10.554+0000] {dag.py:3441} INFO - Setting next_dagrun for download_and_store_images to 2023-03-18T00:00:00+00:00, run_after=2023-03-19T00:00:00+00:00
+[2025-04-04T08:59:10.636+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/dagv2_data_collect.py took 0.926 seconds
+[2025-04-04T08:59:41.027+0000] {processor.py:153} INFO - Started process (PID=256) to work on /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:59:41.030+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/dagv2_data_collect.py for tasks to queue
+[2025-04-04T08:59:41.033+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:59:41.032+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:59:41.422+0000] {processor.py:753} INFO - DAG(s) dict_keys(['download_and_store_images']) retrieved from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T08:59:41.519+0000] {logging_mixin.py:137} INFO - [2025-04-04T08:59:41.519+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2025-04-04T08:59:41.654+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/dagv2_data_collect.py took 0.634 seconds
+[2025-04-04T09:00:12.218+0000] {processor.py:153} INFO - Started process (PID=297) to work on /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T09:00:12.221+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/dagv2_data_collect.py for tasks to queue
+[2025-04-04T09:00:12.224+0000] {logging_mixin.py:137} INFO - [2025-04-04T09:00:12.224+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T09:00:12.978+0000] {processor.py:753} INFO - DAG(s) dict_keys(['download_and_store_images']) retrieved from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T09:00:13.293+0000] {logging_mixin.py:137} INFO - [2025-04-04T09:00:13.292+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2025-04-04T09:00:13.475+0000] {logging_mixin.py:137} INFO - [2025-04-04T09:00:13.475+0000] {dag.py:3441} INFO - Setting next_dagrun for download_and_store_images to 2023-04-22T00:00:00+00:00, run_after=2023-04-23T00:00:00+00:00
+[2025-04-04T09:00:13.657+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/dagv2_data_collect.py took 1.461 seconds
+[2025-04-04T09:00:44.204+0000] {processor.py:153} INFO - Started process (PID=330) to work on /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T09:00:44.208+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/dagv2_data_collect.py for tasks to queue
+[2025-04-04T09:00:44.212+0000] {logging_mixin.py:137} INFO - [2025-04-04T09:00:44.211+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T09:00:45.044+0000] {processor.py:753} INFO - DAG(s) dict_keys(['download_and_store_images']) retrieved from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T09:00:45.233+0000] {logging_mixin.py:137} INFO - [2025-04-04T09:00:45.233+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2025-04-04T09:00:45.415+0000] {logging_mixin.py:137} INFO - [2025-04-04T09:00:45.414+0000] {dag.py:3441} INFO - Setting next_dagrun for download_and_store_images to 2023-05-11T00:00:00+00:00, run_after=2023-05-12T00:00:00+00:00
+[2025-04-04T09:00:45.501+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/dagv2_data_collect.py took 1.310 seconds
+[2025-04-04T09:01:15.859+0000] {processor.py:153} INFO - Started process (PID=376) to work on /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T09:01:15.865+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/dagv2_data_collect.py for tasks to queue
+[2025-04-04T09:01:15.869+0000] {logging_mixin.py:137} INFO - [2025-04-04T09:01:15.868+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T09:01:16.375+0000] {processor.py:753} INFO - DAG(s) dict_keys(['download_and_store_images']) retrieved from /opt/airflow/dags/dagv2_data_collect.py
+[2025-04-04T09:01:16.505+0000] {logging_mixin.py:137} INFO - [2025-04-04T09:01:16.505+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2025-04-04T09:01:16.654+0000] {logging_mixin.py:137} INFO - [2025-04-04T09:01:16.653+0000] {dag.py:3441} INFO - Setting next_dagrun for download_and_store_images to 2023-05-30T00:00:00+00:00, run_after=2023-05-31T00:00:00+00:00
+[2025-04-04T09:01:16.729+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/dagv2_data_collect.py took 0.888 seconds

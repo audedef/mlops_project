@@ -30,29 +30,31 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
 12. On souhaite maintenant faire de l'Entraînement Continue (CT). Ajouter un ou plusieurs DAG Airflow avec des triggers que vous définirez (nouvelle données, entrainement hebdomadaire, performances du modèle en baisse, etc.) pour réentraîner et déployer automatiquement un nouveau modèle.
 
 
-**Pré-requis côté base de données PostgreSQL**
-
-PostgreSQL doit être installé et en cours d'exécution sur le serveur ou la machine locale.
-Il faut créer au préalable une base de données dans laquelle la table plants_data sera créée.
-
-
-**Pré-requis côté Airflow**
+**Pré-requis Airflow**
 
 Installation d'Airflow :
-Apache Airflow doit être installé et configuré sur la machine ou serveur.
-Installer avec pip : pip install apache-airflow.
+Apache Airflow est installé via une image Docker : docker-compose up --build
+Les dépendances Python sont intégrées à l'image et seront téléchargées avec le conteneur ainsi construit.
 
 Connexions Airflow :
-Il faut configurer une connexion PostgreSQL dans Airflow via l'interface utilisateur d'Airflow ou en modifiant le fichier de configuration airflow.cfg.
-Ensuite il faut configurer une connexion AWS S3 dans Airflow pour permettre le téléchargement des images vers le bucket S3.
+Il faut configurer une connexion Minio S3 dans Airflow via l'UI d'Airflow, onglet Connections, pour permettre le téléchargement des images vers le bucket S3.
 
-Dépendances Python :
-Il faut s'assurer que les bibliothèques Python nécessaires sont installées, notamment psycopg2 pour la connexion à PostgreSQL et boto3 pour l'interaction avec AWS S3.
-Les installer avec pip : pip install psycopg2-binary boto3.
+WebUI Airflow : http://127.0.0.1:8080
 
-Configuration des DAGs :
-Placer le fichier DAG dans le répertoire dags d'Airflow pour qu'il soit détecté et exécuté par le planificateur Airflow.
 
-Variables d'environnement et permissions AWS :
+**Pré-requis Minio S3**
 
-Les informations d'identification AWS (clé d'accès et clé secrète) doivent être configurées dans Airflow ou dans les variables d'environnement de votre système. Et vérifier que le compte AWS a les permissions nécessaires pour écrire dans le bucket S3 spécifié.
+Création bucket :
+Se connecter au service S3 avec les login configurés dans Airflow. Et créer un bucket pour y télécharger les images et les paramètres du modèle ML.
+Le nom du bucket doit être "images-bucket"
+
+WebUI Minio : http://127.0.0.1:9001  
+
+
+**Modèle ML de classification binaire**
+
+Pour tester le modèle dans le conteneur :
+`docker-compose restart ml-train`
+
+Pour vérifier les logs du modèle :
+`docker-compose logs -f ml-train`

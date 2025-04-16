@@ -1,0 +1,29 @@
+[2025-04-04T09:04:24.696+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: download_and_store_images.download_images scheduled__2023-08-31T00:00:00+00:00 [queued]>
+[2025-04-04T09:04:24.716+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: download_and_store_images.download_images scheduled__2023-08-31T00:00:00+00:00 [queued]>
+[2025-04-04T09:04:24.717+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2025-04-04T09:04:24.717+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2025-04-04T09:04:24.718+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2025-04-04T09:04:24.752+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): download_images> on 2023-08-31 00:00:00+00:00
+[2025-04-04T09:04:24.760+0000] {standard_task_runner.py:55} INFO - Started process 1994 to run task
+[2025-04-04T09:04:24.766+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'download_and_store_images', 'download_images', 'scheduled__2023-08-31T00:00:00+00:00', '--job-id', '488', '--raw', '--subdir', 'DAGS_FOLDER/dag_data_collect.py', '--cfg-path', '/tmp/tmp9y5vxpvl']
+[2025-04-04T09:04:24.767+0000] {standard_task_runner.py:83} INFO - Job 488: Subtask download_images
+[2025-04-04T09:04:24.789+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/***/settings.py:249: DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+  SQL_ALCHEMY_CONN = conf.get("database", "SQL_ALCHEMY_CONN")
+
+[2025-04-04T09:04:24.837+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/***/utils/sqlalchemy.py:124: DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+  return not conf.get("database", "sql_alchemy_conn").startswith("mssql")
+
+[2025-04-04T09:04:24.903+0000] {task_command.py:388} INFO - Running <TaskInstance: download_and_store_images.download_images scheduled__2023-08-31T00:00:00+00:00 [running]> on host 91a2461e5846
+[2025-04-04T09:04:25.189+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=download_and_store_images
+AIRFLOW_CTX_TASK_ID=download_images
+AIRFLOW_CTX_EXECUTION_DATE=2023-08-31T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2023-08-31T00:00:00+00:00
+[2025-04-04T09:04:25.406+0000] {python.py:177} INFO - Done. Returned value was: [None, None]
+[2025-04-04T09:04:25.492+0000] {taskinstance.py:1323} INFO - Marking task as SUCCESS. dag_id=download_and_store_images, task_id=download_images, execution_date=20230831T000000, start_date=20250404T090424, end_date=20250404T090425
+[2025-04-04T09:04:25.573+0000] {local_task_job.py:208} INFO - Task exited with return code 0
+[2025-04-04T09:04:25.648+0000] {taskinstance.py:2578} INFO - 1 downstream tasks scheduled from follow-on schedule check

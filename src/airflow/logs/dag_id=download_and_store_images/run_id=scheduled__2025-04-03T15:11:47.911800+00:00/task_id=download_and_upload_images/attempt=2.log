@@ -1,0 +1,67 @@
+[2025-04-04T15:49:37.244+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: download_and_store_images.download_and_upload_images scheduled__2025-04-03T15:11:47.911800+00:00 [queued]>
+[2025-04-04T15:49:37.418+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: download_and_store_images.download_and_upload_images scheduled__2025-04-03T15:11:47.911800+00:00 [queued]>
+[2025-04-04T15:49:37.419+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2025-04-04T15:49:37.420+0000] {taskinstance.py:1280} INFO - Starting attempt 2 of 2
+[2025-04-04T15:49:37.420+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2025-04-04T15:49:37.952+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): download_and_upload_images> on 2025-04-03 15:11:47.911800+00:00
+[2025-04-04T15:49:38.021+0000] {standard_task_runner.py:55} INFO - Started process 1005 to run task
+[2025-04-04T15:49:38.036+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'download_and_store_images', 'download_and_upload_images', 'scheduled__2025-04-03T15:11:47.911800+00:00', '--job-id', '824', '--raw', '--subdir', 'DAGS_FOLDER/dag_data_collect.py', '--cfg-path', '/tmp/tmpnvr491wt']
+[2025-04-04T15:49:38.039+0000] {standard_task_runner.py:83} INFO - Job 824: Subtask download_and_upload_images
+[2025-04-04T15:49:38.291+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/***/settings.py:249: DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+  SQL_ALCHEMY_CONN = conf.get("database", "SQL_ALCHEMY_CONN")
+
+[2025-04-04T15:49:38.671+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/***/utils/sqlalchemy.py:124: DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+  return not conf.get("database", "sql_alchemy_conn").startswith("mssql")
+
+[2025-04-04T15:49:38.912+0000] {task_command.py:388} INFO - Running <TaskInstance: download_and_store_images.download_and_upload_images scheduled__2025-04-03T15:11:47.911800+00:00 [running]> on host fd5deae9c635
+[2025-04-04T15:49:40.068+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=download_and_store_images
+AIRFLOW_CTX_TASK_ID=download_and_upload_images
+AIRFLOW_CTX_EXECUTION_DATE=2025-04-03T15:11:47.911800+00:00
+AIRFLOW_CTX_TRY_NUMBER=2
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2025-04-03T15:11:47.911800+00:00
+[2025-04-04T15:49:41.129+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:49:41.132+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:49:41.136+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/***/providers/amazon/aws/utils/connection_wrapper.py:8: DeprecationWarning: extra['host'] is deprecated and will be removed in a future release. Please set extra['endpoint_url'] instead
+  #
+
+[2025-04-04T15:49:53.395+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:49:53.413+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:50:05.808+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:50:05.830+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:55:35.216+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_data_collect.py", line 87, in download_and_upload_images
+    if not check_image_in_s3(new_image_name):
+  File "/opt/airflow/dags/dag_data_collect.py", line 57, in check_image_in_s3
+    return s3.check_for_key(key, bucket_name)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/amazon/aws/hooks/s3.py", line 99, in wrapper
+    return func(*bound_args.args, **bound_args.kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/amazon/aws/hooks/s3.py", line 70, in wrapper
+    return func(*bound_args.args, **bound_args.kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/amazon/aws/hooks/s3.py", line 481, in check_for_key
+    obj = self.head_object(key, bucket_name)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/amazon/aws/hooks/s3.py", line 99, in wrapper
+    return func(*bound_args.args, **bound_args.kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/amazon/aws/hooks/s3.py", line 70, in wrapper
+    return func(*bound_args.args, **bound_args.kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/amazon/aws/hooks/s3.py", line 469, in head_object
+    raise e
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/amazon/aws/hooks/s3.py", line 464, in head_object
+    return self.get_conn().head_object(Bucket=bucket_name, Key=key)
+  File "/home/airflow/.local/lib/python3.7/site-packages/botocore/client.py", line 530, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/botocore/client.py", line 960, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.exceptions.ClientError: An error occurred (503) when calling the HeadObject operation (reached max retries: 4): Service Unavailable
+[2025-04-04T15:55:36.027+0000] {taskinstance.py:1323} INFO - Marking task as FAILED. dag_id=download_and_store_images, task_id=download_and_upload_images, execution_date=20250403T151147, start_date=20250404T154937, end_date=20250404T155536
+[2025-04-04T15:55:36.356+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 824 for task download_and_upload_images (An error occurred (503) when calling the HeadObject operation (reached max retries: 4): Service Unavailable; 1005)
+[2025-04-04T15:55:36.730+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2025-04-04T15:55:36.881+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -10,7 +10,7 @@ For more security, create a .env file in the directory we run this from.
 """
 
 from tqdm import tqdm  # For progress bars
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
 import torch
 from torchvision import transforms, models
@@ -27,6 +27,10 @@ import pandas as pd
 import boto3
 from botocore.exceptions import NoCredentialsError, ClientError
 import time
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # --- Configuration ---
 
@@ -40,36 +44,34 @@ S3_BUCKET_NAME = 'images-bucket'  # bucket name configured in docker-compose/Min
 LOCAL_CSV_PATH = Path('./data/dataset.csv')
 
 # Model Training Configuration
-MODEL_ARCH = resnet34  # good starting point
-IMAGE_SIZE = 224  # Standard size for many ResNets
-BATCH_SIZE = 16  # Increase if we have more GPU memory
-# Number of epochs for fine-tuning (increase for potentially better accuracy)
-EPOCHS = 5
+MODEL_ARCH = resnet34
+IMAGE_SIZE = 224  # Standard size for ResNet
+BATCH_SIZE = 16  # sufficient for our dataset and model
+EPOCHS = 5  # Number of epochs for fine-tuning
 LEARNING_RATE = 0.001
-# Number of parallel workers for data loading (adjust based on CPU cores)
-NUM_WORKERS = 2
+NUM_WORKERS = 2  # Number of parallel workers for data loading
 NUM_CLASSES = 2  # Dandelion vs Grass
 
 # Output Configuration
-# Define a local temporary path for the model state_dict export
+# local temporary path for the model state_dict export
 LOCAL_MODEL_FILENAME = 'pytorch_grass_dandelion_temp.pth'
 # save in current directory temporarily
 LOCAL_MODEL_PATH = Path(f'./{LOCAL_MODEL_FILENAME}')
 
-# Define the desired S3 key (path within the bucket) for the model state_dict
+# Define the S3 key for the model state_dict
 # Using a timestamp for basic versioning
 TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
 S3_MODEL_KEY = f'models/pytorch_grass_dandelion/{TIMESTAMP}/model_state_dict.pth'
 print(
     f"Model state_dict will be saved to S3 key: s3://{S3_BUCKET_NAME}/{S3_MODEL_KEY}")
 
+
 # --- Device Setup ---
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
+
 # --- S3 Connection Setup ---
-
-
 def get_s3_client():
     """Creates and returns a boto3 S3 client."""
     print(f"Attempting to connect to S3/MinIO endpoint: {S3_ENDPOINT_URL}")
@@ -80,7 +82,7 @@ def get_s3_client():
             aws_access_key_id=S3_ACCESS_KEY,
             aws_secret_access_key=S3_SECRET_KEY
         )
-        # Test connection by listing buckets (optional, requires ListBuckets permission)
+        # Test connection by listing buckets
         s3_client.list_buckets()  # This can fail if MINIO_BROWSER=off or permissions are wrong
         print("Successfully connected to S3/MinIO.")
         return s3_client
@@ -116,37 +118,15 @@ if not s3_client:
 
 # --- Data Loading (CSV) ---
 df = None
-# Option 1: Load CSV from Local Path
-if LOCAL_CSV_PATH is not None:
-    if LOCAL_CSV_PATH.exists():
-        print(f"Loading dataset labels from local CSV: {LOCAL_CSV_PATH}")
-        try:
-            df = pd.read_csv(LOCAL_CSV_PATH)
-        except Exception as e:
-            print(f"Error reading local CSV file {LOCAL_CSV_PATH}: {e}")
-            exit(1)
-    else:
-        print(f"Error: Local CSV file not found at {LOCAL_CSV_PATH}")
-        exit(1)
-# Option 2: Load CSV from S3
-elif LOCAL_CSV_PATH is None and 'S3_CSV_KEY' in locals():
-    # (Loading logic same as FastAI version)
+if LOCAL_CSV_PATH.exists():
+    print(f"Loading dataset labels from local CSV: {LOCAL_CSV_PATH}")
     try:
-        print(
-            f"Loading dataset labels from S3: s3://{S3_BUCKET_NAME}/{S3_CSV_KEY}")
-        csv_obj = s3_client.get_object(Bucket=S3_BUCKET_NAME, Key=S3_CSV_KEY)
-        csv_content = csv_obj['Body'].read().decode('utf-8')
-        df = pd.read_csv(io.StringIO(csv_content))
-        print("Successfully loaded CSV from S3.")
-    except ClientError as e:
-        print(
-            f"Error loading CSV from S3 (s3://{S3_BUCKET_NAME}/{S3_CSV_KEY}): {e}")
-        exit(1)
+        df = pd.read_csv(LOCAL_CSV_PATH)
     except Exception as e:
-        print(f"An unexpected error occurred loading CSV from S3: {e}")
+        print(f"Error reading local CSV file {LOCAL_CSV_PATH}: {e}")
         exit(1)
 else:
-    print("Error: No valid CSV data source configured.")
+    print(f"Error: Local CSV file not found at {LOCAL_CSV_PATH}")
     exit(1)
 
 if df is None or df.empty:
@@ -179,7 +159,6 @@ df['label_int'] = df['label'].map(label_map)
 
 
 # --- Custom Function to Load Images from S3 ---
-
 def s3_parse_path(s3_path):
     """Parses an s3://bucket/key path."""
     if not isinstance(s3_path, str) or not s3_path.startswith("s3://"):
@@ -227,12 +206,12 @@ class S3ImageDataset(Dataset):
             # 1. Open the image from bytes
             image_pil = Image.open(io.BytesIO(img_bytes))
 
-            # 3. Convert to RGB (standardizes channels)
+            # 2. Convert to RGB
             image_pil = image_pil.convert('RGB')
             print(
                 f"DEBUG: Worker {os.getpid()} successfully opened and converted {s3_path}")
 
-            # 4. Apply transformations ONLY if image was loaded and converted successfully
+            # 3. Apply transformations ONLY if image was loaded and converted successfully
             if self.transform:
                 try:
                     # Apply transforms to the PIL image
@@ -242,7 +221,7 @@ class S3ImageDataset(Dataset):
                         f"ERROR: Worker {os.getpid()} failed applying transform to image {s3_path} (index {idx}): {e}")
                     return None  # Return None if transform fails
 
-            # If we got here, image should be a transformed tensor
+            # here image should be a transformed tensor
             if image is None:  # Should not happen if transform didn't fail, but safety check
                 print(
                     f"WARNING: Worker {os.getpid()} resulted in None image after transform for {s3_path}")
@@ -283,10 +262,6 @@ def collate_fn_skip_corrupted(batch):
 
     # If the entire batch was corrupted...
     if not batch:
-        # Return dummy tensors or signal somehow. Returning empty tensors is one way.
-        # The shape should match what the rest of your loop expects.
-        # Example: return torch.empty(0, 3, IMAGE_SIZE, IMAGE_SIZE), torch.empty(0, dtype=torch.long)
-        # Simpler: return None and handle in the loop
         return None
 
     # If batch is valid, use the default collate function
@@ -322,7 +297,7 @@ try:
     train_df, val_df = train_test_split(
         df,
         test_size=0.2,       # 20% for validation
-        random_state=42,     # For reproducibility
+        random_state=42,     # reproducibility
         # Ensure class distribution is similar in both sets
         stratify=df['label_int']
     )
@@ -357,25 +332,23 @@ dataset_sizes = {'train': len(train_dataset), 'val': len(val_dataset)}
 
 
 # --- Model Definition (Transfer Learning) ---
-
 print(f"\nLoading pre-trained model: {MODEL_ARCH}")
 # Load the specified pre-trained model
 model = models.resnet34(weights=models.ResNet34_Weights.IMAGENET1K_V1)
-
 # Modify the final classification layer
 num_ftrs = model.fc.in_features
 model.fc = nn.Linear(num_ftrs, NUM_CLASSES)
 print(
     f"\nReplaced ResNet final layer (fc) with {NUM_CLASSES} output features.")
 
-# Move model to the appropriate device (GPU or CPU)
+# Move model to the appropriate device (GPU or CPU) -- CPU should be enough
 model = model.to(device)
 
 # --- Loss Function and Optimizer ---
+# we could use BCEwithLogitsLoss but we choose crossentropy to keep two classes in output
+criterion = nn.CrossEntropyLoss()
 
-criterion = nn.CrossEntropyLoss()  # Standard loss for multi-class classification
-
-# Optimizer: For simplicity here, we optimize all parameters with the same LR.
+# Optimizer
 optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
 
@@ -478,7 +451,6 @@ model, history = train_model(
 
 
 # --- Evaluation ---
-
 print("\nFinal Evaluation on Validation Set...")
 model.eval()  # Set model to evaluation mode
 all_preds = []
@@ -505,7 +477,6 @@ print(classification_report(all_labels, all_preds, target_names=target_names))
 
 
 # --- Model Saving ---
-
 print(f"\nSaving model state dictionary...")
 print(f"Local temporary path: {LOCAL_MODEL_PATH}")
 print(f"Target S3 path: s3://{S3_BUCKET_NAME}/{S3_MODEL_KEY}")

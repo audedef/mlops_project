@@ -1,0 +1,36 @@
+[2025-04-04T09:00:00.146+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: download_and_store_images.upload_images scheduled__2023-04-12T00:00:00+00:00 [queued]>
+[2025-04-04T09:00:00.190+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: download_and_store_images.upload_images scheduled__2023-04-12T00:00:00+00:00 [queued]>
+[2025-04-04T09:00:00.196+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2025-04-04T09:00:00.200+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2025-04-04T09:00:00.201+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2025-04-04T09:00:00.321+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): upload_images> on 2023-04-12 00:00:00+00:00
+[2025-04-04T09:00:00.341+0000] {standard_task_runner.py:55} INFO - Started process 865 to run task
+[2025-04-04T09:00:00.357+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'download_and_store_images', 'upload_images', 'scheduled__2023-04-12T00:00:00+00:00', '--job-id', '211', '--raw', '--subdir', 'DAGS_FOLDER/dagv2_data_collect.py', '--cfg-path', '/tmp/tmp0ax6sueg']
+[2025-04-04T09:00:00.364+0000] {standard_task_runner.py:83} INFO - Job 211: Subtask upload_images
+[2025-04-04T09:00:00.482+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/***/settings.py:249: DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+  SQL_ALCHEMY_CONN = conf.get("database", "SQL_ALCHEMY_CONN")
+
+[2025-04-04T09:00:00.635+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/***/utils/sqlalchemy.py:124: DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+  return not conf.get("database", "sql_alchemy_conn").startswith("mssql")
+
+[2025-04-04T09:00:00.918+0000] {task_command.py:388} INFO - Running <TaskInstance: download_and_store_images.upload_images scheduled__2023-04-12T00:00:00+00:00 [running]> on host 91a2461e5846
+[2025-04-04T09:00:01.698+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=download_and_store_images
+AIRFLOW_CTX_TASK_ID=upload_images
+AIRFLOW_CTX_EXECUTION_DATE=2023-04-12T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2023-04-12T00:00:00+00:00
+[2025-04-04T09:00:01.772+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T09:00:01.775+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T09:00:01.777+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/***/providers/amazon/aws/utils/connection_wrapper.py:8: DeprecationWarning: extra['host'] is deprecated and will be removed in a future release. Please set extra['endpoint_url'] instead
+  #
+
+[2025-04-04T09:00:06.527+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T09:00:06.535+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T09:00:10.162+0000] {python.py:177} INFO - Done. Returned value was: [None, None]
+[2025-04-04T09:00:10.289+0000] {taskinstance.py:1323} INFO - Marking task as SUCCESS. dag_id=download_and_store_images, task_id=upload_images, execution_date=20230412T000000, start_date=20250404T090000, end_date=20250404T090010
+[2025-04-04T09:00:10.540+0000] {local_task_job.py:208} INFO - Task exited with return code 0
+[2025-04-04T09:00:11.080+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check

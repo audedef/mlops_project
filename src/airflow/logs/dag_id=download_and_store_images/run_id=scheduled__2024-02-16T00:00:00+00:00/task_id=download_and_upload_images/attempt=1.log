@@ -1,0 +1,298 @@
+[2025-04-04T15:07:25.216+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: download_and_store_images.download_and_upload_images scheduled__2024-02-16T00:00:00+00:00 [queued]>
+[2025-04-04T15:07:25.512+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: download_and_store_images.download_and_upload_images scheduled__2024-02-16T00:00:00+00:00 [queued]>
+[2025-04-04T15:07:25.513+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2025-04-04T15:07:25.513+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2025-04-04T15:07:25.514+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2025-04-04T15:07:26.267+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): download_and_upload_images> on 2024-02-16 00:00:00+00:00
+[2025-04-04T15:07:26.421+0000] {standard_task_runner.py:55} INFO - Started process 83 to run task
+[2025-04-04T15:07:26.942+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'download_and_store_images', 'download_and_upload_images', 'scheduled__2024-02-16T00:00:00+00:00', '--job-id', '808', '--raw', '--subdir', 'DAGS_FOLDER/dag_data_collect.py', '--cfg-path', '/tmp/tmpfe22eoak']
+[2025-04-04T15:07:26.949+0000] {standard_task_runner.py:83} INFO - Job 808: Subtask download_and_upload_images
+[2025-04-04T15:07:27.435+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/***/settings.py:249: DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+  SQL_ALCHEMY_CONN = conf.get("database", "SQL_ALCHEMY_CONN")
+
+[2025-04-04T15:07:28.317+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/***/utils/sqlalchemy.py:124: DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+  return not conf.get("database", "sql_alchemy_conn").startswith("mssql")
+
+[2025-04-04T15:07:28.658+0000] {task_command.py:388} INFO - Running <TaskInstance: download_and_store_images.download_and_upload_images scheduled__2024-02-16T00:00:00+00:00 [running]> on host fd5deae9c635
+[2025-04-04T15:07:30.128+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=download_and_store_images
+AIRFLOW_CTX_TASK_ID=download_and_upload_images
+AIRFLOW_CTX_EXECUTION_DATE=2024-02-16T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2024-02-16T00:00:00+00:00
+[2025-04-04T15:07:35.081+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:07:35.103+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:07:35.108+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/***/providers/amazon/aws/utils/connection_wrapper.py:8: DeprecationWarning: extra['host'] is deprecated and will be removed in a future release. Please set extra['endpoint_url'] instead
+  #
+
+[2025-04-04T15:07:58.535+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:07:58.549+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:08:21.615+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:08:21.622+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:08:28.831+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:08:28.833+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:08:32.932+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:08:32.957+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:08:36.383+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:08:36.385+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:08:41.932+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:08:41.937+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:08:44.628+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:08:44.632+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:08:47.174+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:08:47.179+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:08:56.673+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:08:56.677+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:08:59.342+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:08:59.354+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:09:01.809+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:09:01.810+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:09:04.931+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:09:04.938+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:09:08.429+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:09:08.433+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:09:11.595+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:09:11.605+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:09:14.588+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:09:14.590+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:09:19.091+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:09:19.093+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:09:24.215+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:09:24.216+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:09:29.523+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:09:29.525+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:09:35.671+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:09:35.675+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:09:43.078+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:09:43.080+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:09:46.281+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:09:46.283+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:09:49.663+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:09:49.664+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:09:52.636+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:09:52.638+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:10:00.378+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:10:00.388+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:10:06.442+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:10:06.447+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:10:10.066+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:10:10.072+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:10:12.727+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:10:12.731+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:10:15.907+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:10:15.918+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:10:24.416+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:10:24.430+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:10:29.381+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:10:29.390+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:10:35.805+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:10:35.827+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:11:03.740+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:11:03.756+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:11:21.271+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:11:21.340+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:11:35.031+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:11:35.040+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:11:49.835+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:11:49.863+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:11:54.170+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:11:54.225+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:11:57.888+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:11:58.058+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:12:08.109+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:12:08.111+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:12:13.286+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:12:13.295+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:12:17.364+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:12:17.370+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:12:23.438+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:12:23.443+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:12:41.582+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:12:41.618+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:12:55.912+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:12:55.926+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:13:00.693+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:13:00.701+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:13:08.599+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:13:08.611+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:13:13.135+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:13:13.138+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:13:21.476+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:13:21.506+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:13:25.096+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:13:25.100+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:13:28.000+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:13:28.002+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:13:33.969+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:13:33.980+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:13:37.265+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:13:37.267+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:13:42.688+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:13:42.705+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:13:57.788+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:13:57.814+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:14:12.004+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:14:12.053+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:14:55.116+0000] {base.py:73} INFO - Using connection ID 'minio_s3' for task execution.
+[2025-04-04T15:14:55.147+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='minio_s3', conn_type='aws') credentials retrieved from login and password.
+[2025-04-04T15:17:15.623+0000] {base_job.py:243} ERROR - LocalTaskJob heartbeat got an exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 3361, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 256, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 691, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 72, in __exit__
+    with_traceback=exc_tb,
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/engine/create.py", line 578, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.7/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "postgres" to address: Temporary failure in name resolution
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/jobs/base_job.py", line 215, in heartbeat
+    session.merge(self)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 3057, in merge
+    _resolve_conflict_map=_resolve_conflict_map,
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 3135, in _merge
+    options=options,
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2856, in get
+    execution_options=execution_options,
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2974, in _get_impl
+    load_options=load_options,
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/loading.py", line 534, in load_on_pk_identity
+    bind_arguments=bind_arguments,
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1713, in execute
+    conn = self._connection_for_bind(bind)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1553, in _connection_for_bind
+    engine, execution_options
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 747, in _connection_for_bind
+    conn = bind.connect()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 3315, in connect
+    return self._connection_cls(self, close_with_result=close_with_result)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 3394, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, _connection)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 3365, in _wrap_pool_connect
+    e, dialect, self
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2199, in _handle_dbapi_exception_noconnection
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 3361, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 256, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 691, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 72, in __exit__
+    with_traceback=exc_tb,
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/engine/create.py", line 578, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.7/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate host name "postgres" to address: Temporary failure in name resolution
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2025-04-04T15:18:38.974+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/util/connection.py", line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/lib/python3.7/socket.py", line 752, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 710, in urlopen
+    chunked=chunked,
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    self.sock = conn = self._new_conn()
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connection.py", line 187, in _new_conn
+    self, "Failed to establish a new connection: %s" % e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x7fda83c33e50>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/requests/adapters.py", line 499, in send
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/airflow/.local/lib/python3.7/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='raw.githubusercontent.com', port=443): Max retries exceeded with url: /btphan95/greenr-***/master/data/dandelion/00000052.jpg (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fda83c33e50>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_data_collect.py", line 87, in download_and_upload_images
+    if not check_image_in_s3(new_image_name):
+  File "/opt/airflow/dags/dag_data_collect.py", line 31, in download_image
+  File "/home/airflow/.local/lib/python3.7/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/requests/adapters.py", line 565, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='raw.githubusercontent.com', port=443): Max retries exceeded with url: /btphan95/greenr-***/master/data/dandelion/00000052.jpg (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fda83c33e50>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))
+[2025-04-04T15:19:04.478+0000] {taskinstance.py:1323} INFO - Marking task as UP_FOR_RETRY. dag_id=download_and_store_images, task_id=download_and_upload_images, execution_date=20240216T000000, start_date=20250404T150725, end_date=20250404T151904
+[2025-04-04T15:19:10.059+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 808 for task download_and_upload_images (HTTPSConnectionPool(host='raw.githubusercontent.com', port=443): Max retries exceeded with url: /btphan95/greenr-***/master/data/dandelion/00000052.jpg (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fda83c33e50>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')); 83)
+[2025-04-04T15:19:10.246+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2025-04-04T15:19:12.159+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check
