@@ -11,11 +11,19 @@ with DAG(
     default_args=default_args,
     schedule_interval=None,
     catchup=False,
-    description='Entraîne le modèle ML depuis model_2.py',
+    description='Collecte les données puis entraîne le modèle ML',
 ) as dag:
+
+    collect_data = BashOperator(
+        task_id='collect_data',
+        bash_command='python /app/dag_collect_data_2.py',
+        cwd='/app'
+    )
 
     run_training = BashOperator(
         task_id='run_model_training',
         bash_command='python /app/model_2.py',
         cwd='/app'
     )
+
+    collect_data >> run_training
