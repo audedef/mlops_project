@@ -49,7 +49,7 @@ for label, api_url in repos.items():
     response = requests.get(api_url)
     if response.status_code == 200:
         images = [f for f in response.json() if f['name'].endswith('.jpg')]
-        for f in images[:50]:
+        for f in images[:150]:
             filename = f"{label}_{f['name']}"
             local_path = os.path.join("temp_images", filename)
             s3_key = f"{prefix}{filename}"

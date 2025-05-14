@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.pth
+temp_model/
+data/
+mlruns/
+.env

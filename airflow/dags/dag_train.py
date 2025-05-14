@@ -11,7 +11,7 @@ with DAG(
     default_args=default_args,
     schedule_interval=None,
     catchup=False,
-    description='Collecte les données puis entraîne le modèle ML',
+    description='Collecte les données, entraîne le modèle et met à jour Streamlit',
 ) as dag:
 
     collect_data = BashOperator(
@@ -26,4 +26,10 @@ with DAG(
         cwd='/app'
     )
 
-    collect_data >> run_training
+    update_streamlit_model = BashOperator(
+        task_id='update_streamlit_model',
+        bash_command='cp /app/temp_model/model_state_dict.pth /streamlit/temp_model/model_state_dict.pth',
+        cwd='/app'
+    )
+
+    collect_data >> run_training >> update_streamlit_model

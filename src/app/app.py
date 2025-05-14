@@ -3,20 +3,23 @@ import streamlit as st
 import torch
 import torchvision.transforms as transforms
 from PIL import Image
-import requests
-import io
 import os
 from torchvision.models import resnet34
 
-
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "temp_model/model_state_dict.pth")
 
-# Chargement du modèle
-model = resnet34(weights=None)
+# Détection automatique si le fichier du modèle a changé
+@st.cache_resource
+def load_model(last_modified_time):
+    model = resnet34(weights=None)
+    model.fc = torch.nn.Linear(model.fc.in_features, 2)
+    model.load_state_dict(torch.load(MODEL_PATH, map_location=torch.device('cpu')))
+    model.eval()
+    return model
 
-model.fc = torch.nn.Linear(model.fc.in_features, 2)  # adapter au nb de classes
-model.load_state_dict(torch.load(MODEL_PATH, map_location=torch.device('cpu')))
-model.eval()
+# Vérifie la date de modification du modèle
+model_timestamp = os.path.getmtime(MODEL_PATH)
+model = load_model(model_timestamp)
 
 # Transforms
 transform = transforms.Compose([
