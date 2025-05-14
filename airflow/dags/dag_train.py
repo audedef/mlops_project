@@ -28,7 +28,7 @@ with DAG(
 
     update_streamlit_model = BashOperator(
         task_id='update_streamlit_model',
-        bash_command='cp /app/temp_model/model_state_dict.pth /streamlit/temp_model/model_state_dict.pth',
+        bash_command='cp /app/temp_model/model_state_dict.pth /app_streamlit/temp_model/model_state_dict.pth',
         cwd='/app'
     )
 
