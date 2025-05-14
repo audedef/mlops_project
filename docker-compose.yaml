@@ -12,7 +12,9 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   redis:
-    image: redis:7
+    image: redis:7.4.2
+    ports:
+      - "6379:6379"
 
   airflow:
     build:
@@ -60,19 +62,6 @@ services:
       - ./data:/app/data   # ✅ ajoute ceci
 
     command: bash -c "airflow scheduler"
-
-  mysql:
-    image: mysql:8
-    restart: always
-    environment:
-      MYSQL_DATABASE: plants_db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - "3307:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
 
   minio:
     image: minio/minio
