@@ -1,4 +1,4 @@
-name: CI - Test ML + MinIO
+name: CI - Test ML + MinIO + MLflow
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
       - feature/**
 
 jobs:
-  test-ml-minio:
+  test-ml-minio-mlflow:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,17 +21,21 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
           docker-compose --version
 
-      - name: Build ML + MinIO containers
-        run: docker-compose -f docker-compose.yaml build minio ml-train
+      - name: Build ML, MinIO and MLflow containers
+        run: docker-compose -f docker-compose.yaml build ml-train minio mlflow
 
-      - name: Start MinIO
-        run: docker-compose -f docker-compose.yaml up -d minio
+      - name: Start MinIO and MLflow
+        run: docker-compose -f docker-compose.yaml up -d minio mlflow
 
-      - name: Wait for MinIO to be ready
+      - name: Wait for services to be ready
         run: |
           for i in {1..10}; do
-            echo "⌛ Waiting for MinIO... attempt $i"
-            curl --fail http://localhost:9000 || sleep 3
+            echo "⏳ Waiting for MinIO..."
+            curl --fail http://localhost:9000 && break || sleep 3
+          done
+          for i in {1..10}; do
+            echo "⏳ Waiting for MLflow..."
+            curl --fail http://localhost:5002 && break || sleep 3
           done
 
       - name: Run ML training script
