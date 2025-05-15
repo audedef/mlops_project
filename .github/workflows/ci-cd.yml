@@ -67,7 +67,7 @@ jobs:
           done
 
       - name: List Airflow DAGs
-        run: docker-compose -f docker-compose.yaml exec airflow airflow dags list
+        run: docker-compose -f docker-compose.yaml exec -T airflow airflow dags list
 
       - name: Clean up all containers
         if: always()
