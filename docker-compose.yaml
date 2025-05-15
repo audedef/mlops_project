@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.8' 
 
 services:
 
@@ -20,7 +20,6 @@ services:
     build:
       context: ./airflow
       dockerfile: Dockerfile
-
     restart: always
     depends_on:
       - postgres
@@ -30,10 +29,11 @@ services:
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
       AIRFLOW__CORE__FERNET_KEY: gpndZWY8UrbgYPFgar5CvKk05GWDwOcw1dYCEESrcEo=
       AIRFLOW__WEBSERVER__SECRET_KEY: super_secret_key_1234567890
-
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./src/ml:/app
+      - ./data:/app/data
+      - ./src/app:/app_streamlit 
     ports:
       - "8080:8080"
     command: >
@@ -42,6 +42,7 @@ services:
         airflow users create --username admin --password admin --firstname Air --lastname Flow --role Admin --email admin@example.com &&
         airflow webserver
       "
+
   airflow-scheduler:
     build:
       context: ./airflow
@@ -55,12 +56,11 @@ services:
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
       AIRFLOW__CORE__FERNET_KEY: gpndZWY8UrbgYPFgar5CvKk05GWDwOcw1dYCEESrcEo=
       AIRFLOW__WEBSERVER__SECRET_KEY: super_secret_key_1234567890
-
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./src/ml:/app
-      - ./data:/app/data   # ✅ ajoute ceci
-
+      - ./data:/app/data
+      - ./src/app:/app_streamlit 
     command: bash -c "airflow scheduler"
 
   minio:
@@ -119,14 +119,11 @@ services:
       - "8501:8501"
     volumes:
       - ./src/app:/app
-      - ./src/ml/temp_model:/app/temp_model   # ✅ modèle monté dans un sous-dossier
+      - ./src/ml/temp_model:/app/temp_model
     depends_on:
       - ml-train
-
-
-
+    command: streamlit run app.py --server.port=8501 --server.address=0.0.0.0 
 volumes:
   mysql_data:
   minio_data:
   postgres_data:
-
