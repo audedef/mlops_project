@@ -55,4 +55,3 @@ jobs:
       - name: 🧹 Stop and clean up
         if: always()
         run: sudo docker-compose down -v
-
