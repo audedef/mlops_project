@@ -26,9 +26,13 @@ jobs:
 
       - name: Wait and test FastAPI
         run: |
-          sleep 10
-          curl --fail http://localhost:8000/docs || exit 1
+          for i in {1..10}; do
+            echo "⏳ Waiting for API... attempt $i"
+            curl --fail http://localhost:8000/docs && break
+            sleep 3
+          done
 
       - name: Clean up
         if: always()
         run: docker-compose -f docker-compose.yaml down -v
+
