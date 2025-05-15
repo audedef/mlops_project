@@ -102,8 +102,8 @@ loader = DataLoader(raw_dataset, batch_size=BATCH_SIZE, shuffle=True, collate_fn
 
 sample_batch = next(iter(loader), [])
 if len(sample_batch) < 2:
-    logger.error("❌ Pas assez d’images valides pour entraîner.")
-    raise RuntimeError("Échec : pas assez d’images valides.")
+    logger.warning("⚠️ Pas assez d’images valides pour entraîner. Entraînement annulé proprement.")
+    exit(0)
 
 logger.info(f"✅ DataLoader prêt - batch_size={BATCH_SIZE}")
 
