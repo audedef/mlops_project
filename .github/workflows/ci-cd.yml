@@ -1,4 +1,4 @@
-name: CI - Test ML + MinIO + MLflow + Streamlit
+name: CI - Test Full MLOps Stack
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
       - feature/**
 
 jobs:
-  test-ml-minio-mlflow-streamlit:
+  test-full-stack:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,13 +21,18 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
           docker-compose --version
 
-      - name: Build all needed containers
-        run: docker-compose -f docker-compose.yaml build minio mlflow ml-train streamlit
+      - name: Build all containers
+        run: |
+          docker-compose -f docker-compose.yaml build \
+            postgres redis airflow airflow-scheduler \
+            minio mlflow ml-train streamlit
 
-      - name: Start MinIO and MLflow
-        run: docker-compose -f docker-compose.yaml up -d minio mlflow
+      - name: Start backend services
+        run: |
+          docker-compose -f docker-compose.yaml up -d \
+            postgres redis minio mlflow
 
-      - name: Wait for services to be ready
+      - name: Wait for MinIO and MLflow
         run: |
           for i in {1..10}; do
             echo "⏳ Waiting for MinIO..."
@@ -47,10 +52,23 @@ jobs:
       - name: Wait and test Streamlit
         run: |
           for i in {1..10}; do
-            echo "⌛ Waiting for Streamlit (attempt $i)..."
+            echo "⌛ Waiting for Streamlit..."
             curl --fail http://localhost:8501 && break || sleep 3
           done
 
-      - name: Clean up
+      - name: Start Airflow services
+        run: docker-compose -f docker-compose.yaml up -d airflow airflow-scheduler
+
+      - name: Wait for Airflow Webserver
+        run: |
+          for i in {1..10}; do
+            echo "⌛ Waiting for Airflow..."
+            curl --fail http://localhost:8080 && break || sleep 5
+          done
+
+      - name: List Airflow DAGs
+        run: docker-compose -f docker-compose.yaml exec airflow airflow dags list
+
+      - name: Clean up all containers
         if: always()
         run: docker-compose -f docker-compose.yaml down -v
