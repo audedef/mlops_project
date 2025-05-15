@@ -11,36 +11,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 📥 Checkout code
-      uses: actions/checkout@v3
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
 
-    - name: 🐳 Set up Docker
-      uses: docker/setup-buildx-action@v3
+      - name: 🐳 Set up Docker
+        uses: docker/setup-buildx-action@v3
 
-    - name: �� Build Docker Compose services
-      run: docker compose -f docker-compose.yaml build
+      - name: 🏗 Build Docker Compose services
+        run: docker compose -f docker-compose.yaml build
 
-    - name: 🚀 Start all containers
-      run: docker compose -f docker-compose.yaml up -d
+      - name: 🚀 Start all containers
+        run: docker compose -f docker-compose.yaml up -d
 
-    - name: ⏱ Wait for services to initialize
-      run: sleep 30
+      - name: ⏱ Wait for services to initialize
+        run: sleep 30
 
-    - name: ✅ Healthcheck: FastAPI (API)
-      run: curl --fail http://localhost:8000 || exit 1
+      - name: ✅ Healthcheck: FastAPI (API)
+        run: curl --fail http://localhost:8000 || exit 1
 
-    - name: ✅ Healthcheck: Streamlit
-      run: curl --fail http://localhost:8501 || exit 1
+      - name: ✅ Healthcheck: Streamlit
+        run: curl --fail http://localhost:8501 || exit 1
 
-    - name: ✅ Healthcheck: Airflow
-      run: curl --fail http://localhost:8080 || echo "Airflow UI not ready yet"
+      - name: ✅ Healthcheck: Airflow
+        run: curl --fail http://localhost:8080 || echo "Airflow UI not ready yet"
 
-    - name: ✅ Healthcheck: MinIO
-      run: curl --fail http://localhost:9000 || exit 1
+      - name: ✅ Healthcheck: MinIO
+        run: curl --fail http://localhost:9000 || exit 1
 
-    - name: ✅ Healthcheck: MLflow
-      run: curl --fail http://localhost:5002 || exit 1
+      - name: ✅ Healthcheck: MLflow
+        run: curl --fail http://localhost:5002 || exit 1
 
-    - name: 🧹 Tear down containers
-      run: docker compose down
+      - name: 🧹 Tear down containers
+        run: docker compose down
 
