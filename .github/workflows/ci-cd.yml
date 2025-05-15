@@ -3,8 +3,8 @@ name: CI - Phenix MLOps
 on:
   push:
     branches:
-      - main
-      - feature/**
+      - dev
+      - feature/Martial
 
 jobs:
   build-and-test:
