@@ -1,4 +1,4 @@
-name: CI - Test API only
+name: CI - Test ML + MinIO
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
       - feature/**
 
 jobs:
-  test-api:
+  test-ml-minio:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,18 +21,22 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
           docker-compose --version
 
-      - name: Build and start API container
-        run: docker-compose -f docker-compose.yaml up -d api
+      - name: Build ML + MinIO containers
+        run: docker-compose -f docker-compose.yaml build minio ml-train
 
-      - name: Wait and test FastAPI
+      - name: Start MinIO
+        run: docker-compose -f docker-compose.yaml up -d minio
+
+      - name: Wait for MinIO to be ready
         run: |
           for i in {1..10}; do
-            echo "⏳ Waiting for API... attempt $i"
-            curl --fail http://localhost:8000/docs && break
-            sleep 3
+            echo "⌛ Waiting for MinIO... attempt $i"
+            curl --fail http://localhost:9000 || sleep 3
           done
+
+      - name: Run ML training script
+        run: docker-compose -f docker-compose.yaml run --rm ml-train python model_2.py
 
       - name: Clean up
         if: always()
         run: docker-compose -f docker-compose.yaml down -v
-
