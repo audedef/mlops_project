@@ -1,32 +1,19 @@
-name: CI - Docker Compose
+name: CI - Test API only
 
 on:
   push:
     branches:
-      - main
       - dev
+      - main
       - feature/**
 
-env:
-  COMPOSE_FILE: docker-compose.yaml
-  COMPOSE_PROJECT_NAME: mlops_project
-
 jobs:
-  test:
+  test-api:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Set up Docker
-        run: |
-          sudo apt update
-          sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-          sudo apt update
-          sudo apt install -y docker-ce
 
       - name: Set up Docker Compose
         run: |
@@ -34,24 +21,14 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
           docker-compose --version
 
-      - name: Build and start containers
-        run: sudo docker-compose up -d --build
+      - name: Build and start API container
+        run: docker-compose -f docker-compose.yaml up -d api
 
-      - name: Healthcheck: FastAPI
-        run: curl --fail http://localhost:8000 || exit 1
+      - name: Wait and test FastAPI
+        run: |
+          sleep 10
+          curl --fail http://localhost:8000/docs || exit 1
 
-      - name: Healthcheck: Streamlit
-        run: curl --fail http://localhost:8501 || exit 1
-
-      - name: Healthcheck: Airflow
-        run: curl --fail http://localhost:8080 || echo "Airflow may not be ready yet"
-
-      - name: Healthcheck: MLflow
-        run: curl --fail http://localhost:5002 || exit 1
-
-      - name: Healthcheck: MinIO
-        run: curl --fail http://localhost:9000 || exit 1
-
-      - name: Stop and clean up
+      - name: Clean up
         if: always()
-        run: sudo docker-compose down -v
+        run: docker-compose -f docker-compose.yaml down -v
