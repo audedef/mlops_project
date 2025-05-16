@@ -83,7 +83,8 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
    - Chargez vos données
 
    - Visualisez les prédictions
-   ![streamlit2 1](https://github.com/user-attachments/assets/dfa1ecbb-3b5c-4da1-8e68-5ac67f6e3ee0)
+     
+![streamlit2 1](https://github.com/user-attachments/assets/dfa1ecbb-3b5c-4da1-8e68-5ac67f6e3ee0)
 ![streamlit1 1](https://github.com/user-attachments/assets/09af827b-fd2b-4385-81f2-6fe416c046ef)
 
 
