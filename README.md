@@ -107,6 +107,14 @@ main → Branche stable (production)
 
 └── sous branche 4
 
+## 🔄 Intégration Continue avec GitHub Actions
+### Workflow d'Exécution
+Notre pipeline CI s'exécute automatiquement à chaque push via GitHub Actions :
+![image](https://github.com/user-attachments/assets/c671cdd5-4adc-462e-ae5c-4dc399aea8af)
+
+#à ajouter
+* pourquoi on n'a pas fait de service mysql : génération auto via le dag airflow d'un csv en local dans le projet
+* idéalement il aurait fallu mettre un mot sur le choix des techno : pourquoi fastai vs pytorch vs keras pour le modèle, idem côté api et webapp
 
 
 
