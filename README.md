@@ -94,11 +94,17 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
 
 ### Stratégie de Branches
 Nous utilisons un workflow Git avec deux branches principales (main et dev) et des sous branches :
+
 main → Branche stable (production)
+
 └── dev → Branche d'intégration (développement)
+
 ├── sous branche 1
+
 ├── sous branche 2
+
 ├── sous branche 3
+
 └── sous branche 4
 
 
