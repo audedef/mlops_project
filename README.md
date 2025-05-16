@@ -29,7 +29,7 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
 
 12. On souhaite maintenant faire de l'Entraînement Continue (CT). Ajouter un ou plusieurs DAG Airflow avec des triggers que vous définirez (nouvelle données, entrainement hebdomadaire, performances du modèle en baisse, etc.) pour réentraîner et déployer automatiquement un nouveau modèle.
 
-**Lancement du projet**
+**Lancement du projet 🔧**
 
 1. Lancez l'ensemble des services avec Docker Compose :
    <pre> docker-compose -f docker-compose.yaml up -d   </pre>
@@ -39,13 +39,13 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
 
    - MinIO : Stockage d'objets pour les données et du modèle entraîné 
 
-   - MLflow : Suivi des expériences ML
+   - MLflow : Suivi des expériences ML 📊
 
    - Redis : Cache et système de message
 
    - API : Service d'inférence du modèle
 
-   - Streamlit : Interface utilisateur
+   - Streamlit : Interface utilisateur 🖥️
    ![docker build 1](https://github.com/user-attachments/assets/3228efa9-5cd5-4811-85b2-fc4d12a19c49)
 
 2. Construction du bucket "images-bucket" sur minio
@@ -65,7 +65,8 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
 
    - Activez le DAG principal
 
-   - Surveillez l'exécution des tâches
+   - Ps: Il faut configurer une connexion Minio S3 dans Airflow via l'UI d'Airflow, onglet Connections, pour permettre le téléchargement des images vers le bucket S3.
+
    ![dag 1](https://github.com/user-attachments/assets/87ff28a9-f7bb-42dd-a12e-d399128b33c2)
 
 **📚 Guide d'Utilisation**
@@ -77,7 +78,7 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
    - Gérer les versions des modèles
    ![ml_flow 1](https://github.com/user-attachments/assets/90164a7f-cd0c-4a76-8b5b-0cbd8a6fc197)
 
-2. l'interface utilisateur qui permet d'utiliser notre modèle
+2. l'interface utilisateur qui permet d'utiliser notre modèle 🖥️
    - Accédez à l'application (http://localhost:8501)
 
    - Chargez vos données
