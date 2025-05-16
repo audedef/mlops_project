@@ -118,6 +118,11 @@ Notre pipeline CI s'exécute automatiquement à chaque push via GitHub Actions :
 L'objectif du projet était d'utiliser du deep learning, bien qu'une simple régression logistique aurait également eu de très bonnes performances pour cette tâche.
 Nous avons choisi de le développer avec Pytorch un petit réseaux de neurone à 34 couches (resnet34).
 
+## Difficultés
+1/ Nous avons commencé par construire les services Docker sur mac os mais avons eu de nombreux problèmes de comptabilité qui nous ont obligé de revoir toute une partie du code pour les rendre compatible sur windows / linux. Cependant une fois fonctionnel sur windows/linux, ils ne l'étaient plus sur mac os. Nous n'avons pas réussi à aboutir à une version fonctionnelle sur les deux os. De plus la branche dev a trop dévié de la branche main donc nous avons réalisé un git reset --hard dev, perdant ainsi les insights de la branche main. Ci-dessous une sauvegarde des commits.
+<img width="1428" alt="image" src="https://github.com/user-attachments/assets/34ef1690-2f92-41da-9190-4a0c7c63254f" />
+
+2/ Le déploiement Kubernetes (en local) ne fonctionne que pour 3 services : minio, mlflow et postgres. 
 
 
 
