@@ -54,6 +54,7 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
    - Créez un bucket nommé images-bucket
 
    - Configurez les permissions d'accès
+   #ajouter le screen du dossier ou ce trouve le modèle
 
 
    ![Minio1 1](https://github.com/user-attachments/assets/4948ad64-6a9a-41de-8113-78a06ff802f9)
@@ -76,6 +77,7 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
    - Visualiser les métriques
 
    - Gérer les versions des modèles
+     #ajouter le screen de differentes etapes du modèles (plusieurs train)
    ![ml_flow 1](https://github.com/user-attachments/assets/90164a7f-cd0c-4a76-8b5b-0cbd8a6fc197)
 
 2. l'interface utilisateur qui permet d'utiliser notre modèle 🖥️
@@ -87,6 +89,17 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
      
 ![streamlit2 1](https://github.com/user-attachments/assets/dfa1ecbb-3b5c-4da1-8e68-5ac67f6e3ee0)
 ![streamlit1 1](https://github.com/user-attachments/assets/09af827b-fd2b-4385-81f2-6fe416c046ef)
+
+## 🌿 Gestion des Branches Git
+
+### Stratégie de Branches
+Nous utilisons un workflow Git avec deux branches principales (main et dev) et des sous branches :
+main → Branche stable (production)
+└── dev → Branche d'intégration (développement)
+├── sous branche 1
+├── sous branche 2
+├── sous branche 3
+└── sous branche 4
 
 
 
