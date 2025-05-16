@@ -32,7 +32,7 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
 **Lancement du projet**
 
 1. Build du projet avec docker compose qui lance nos services principaux de: airflow, minio, mlflow, redis, api du modèle, et l'interface frontend avec streamlit.
-   <pre> ```docker-compose -f docker-compose.yaml up -d  ``` </pre>
+   <pre> docker-compose -f docker-compose.yaml up -d   </pre>
    ![docker build 1](https://github.com/user-attachments/assets/3228efa9-5cd5-4811-85b2-fc4d12a19c49)
 2. Construction du bucket "images-bucket" sur minio
    ![Minio1 1](https://github.com/user-attachments/assets/4948ad64-6a9a-41de-8113-78a06ff802f9)
@@ -40,6 +40,11 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
    ![Minio2 1](https://github.com/user-attachments/assets/18f060fa-2265-49a5-857f-e841245fd36f)
 3. Lancement du dag qui automatise le workflow
    ![dag 1](https://github.com/user-attachments/assets/87ff28a9-f7bb-42dd-a12e-d399128b33c2)
+
+**Explication et prise en main du projet**
+1. utilisation de mlflow pour le suivi des performances de notre modèle
+   ![ml_flow 1](https://github.com/user-attachments/assets/90164a7f-cd0c-4a76-8b5b-0cbd8a6fc197)
+
 
 
 
