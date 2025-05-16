@@ -45,6 +45,11 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
 1. utilisation de mlflow pour le suivi des performances de notre modèle
    ![ml_flow 1](https://github.com/user-attachments/assets/90164a7f-cd0c-4a76-8b5b-0cbd8a6fc197)
 
+2. l'interface utilisateur qui permet d'utiliser notre modèle
+   ![streamlit2 1](https://github.com/user-attachments/assets/dfa1ecbb-3b5c-4da1-8e68-5ac67f6e3ee0)
+![streamlit1 1](https://github.com/user-attachments/assets/09af827b-fd2b-4385-81f2-6fe416c046ef)
+
+
 
 
 
