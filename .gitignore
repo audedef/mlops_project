@@ -1,0 +1,8 @@
+*.env
+temp_images/
+temp_model/
+*.tmp 
+__pycache__/
+*.pyc
+*.pth
+data/
