@@ -1,6 +1,6 @@
 # mlops_project
 
-**Recontextualisation des objectifs du projet**
+## Objectifs du projet
 
 1. Extraire et prétraiter les données : télécharger les images depuis les URLs, les nettoyer et les préparer pour l'entraînement.
 
@@ -29,7 +29,7 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
 
 12. On souhaite maintenant faire de l'Entraînement Continue (CT). Ajouter un ou plusieurs DAG Airflow avec des triggers que vous définirez (nouvelle données, entrainement hebdomadaire, performances du modèle en baisse, etc.) pour réentraîner et déployer automatiquement un nouveau modèle.
 
-**Lancement du projet 🔧**
+## 🔧 Lancement du projet
 
 1. Lancez l'ensemble des services avec Docker Compose :
    <pre> docker-compose -f docker-compose.yaml up -d   </pre>
@@ -43,10 +43,12 @@ utilisateur simple pour visualiser les résultats des prédictions. Utilisez la 
 
    - Redis : Cache et système de message
 
-   - API : Service d'inférence du modèle
+   - API : Service d'inférence du modèle (FastAPI)
 
    - Streamlit : Interface utilisateur 🖥️
    ![docker build 1](https://github.com/user-attachments/assets/3228efa9-5cd5-4811-85b2-fc4d12a19c49)
+
+   NB : Nous avons fait le choix de ne pas utiliser de service MySQL pour stocker les données tabulaires mais plutôt d'automatiser avec Airflow la génération et mise à jour d'un fichier csv dans le dossier data du projet Git. Compte tenu de la taille du dataset (400 lignes), cette méthode nous paraissait plus directe et efficace.
 
 2. Construction du bucket "images-bucket" sur minio
    - Accédez à l'interface MinIO (http://localhost:9001)
@@ -112,9 +114,9 @@ main → Branche stable (production)
 Notre pipeline CI s'exécute automatiquement à chaque push via GitHub Actions :
 ![image](https://github.com/user-attachments/assets/c671cdd5-4adc-462e-ae5c-4dc399aea8af)
 
-#à ajouter
-* pourquoi on n'a pas fait de service mysql : génération auto via le dag airflow d'un csv en local dans le projet
-* idéalement il aurait fallu mettre un mot sur le choix des techno : pourquoi fastai vs pytorch vs keras pour le modèle, idem côté api et webapp
+## Choix du modèle
+L'objectif du projet était d'utiliser du deep learning, bien qu'une simple régression logistique aurait également eu de très bonnes performances pour cette tâche.
+Nous avons choisi de le développer avec Pytorch un petit réseaux de neurone à 34 couches (resnet34).
 
 
 
